@@ -4,9 +4,10 @@ var request = require('request');
 
 // Creates a new Thing in the DB
 exports.compileAndRun = function(req, res) {
-  console.log(req.body.code);
+  var code = req.body.code;
+  var languageId = req.body.languageId;
   var languageAndCode = {
-    language: '7',
+    language: languageId,
     code : req.body.code,
     stdin: 'nonsense'
   };

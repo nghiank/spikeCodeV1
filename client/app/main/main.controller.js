@@ -3,14 +3,14 @@
 
 function MainController($scope, $http) {
   var self = this;
-  this.awesomeThings = [];
 
-  $http.get('/api/things').then(function(response) {
-    self.awesomeThings = response.data;
-  });
+  $scope.languageId = 7;
+
   $scope.submitCode = function() {
+    console.log('LangaugeId=' + $scope.languageId);
     $http.post('/api/code/compile',
       {
+        languageId: $scope.languageId,
         code: $scope.code
       }
     ).then(function(response){
