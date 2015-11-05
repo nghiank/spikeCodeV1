@@ -17,6 +17,10 @@
                 Submit
               </button>
               <p> {{status}}</p>
+
+              <div ng-messages="build.error" role="alert">
+                  <div ng-message="compileError">{{build.detailError}}</div>
+              </div>
           </div>
       </form>
     </div>

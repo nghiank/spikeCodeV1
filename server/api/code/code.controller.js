@@ -26,10 +26,10 @@ exports.compileAndRun = function(req, res) {
   request(options, function(error,response, body){
     if (error) {
       console.log(error);
+      res.status(response.statusCode).send(error);
     } else {
       console.log(response.statusCode, body);
+      res.status(response.statusCode).send(body);
     }
   });
-
-
 };
