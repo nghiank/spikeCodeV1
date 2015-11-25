@@ -42,5 +42,4 @@ git clone https://github.com/nghiank/runCompile.git
 cd ~/code/runCompile/setup
 sudo ./Install_14.04.sh
 
-
-
+npm install -g grunt-cli bower
