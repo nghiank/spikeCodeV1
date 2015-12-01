@@ -27,7 +27,8 @@
     "passport-local": "^1.0.0",
     "passport-twitter": "latest",
     "request": "^2.65.0",
-    "serve-favicon": "^2.3.0"
+    "serve-favicon": "^2.3.0",
+    "spikeCodeGen": "git+https://github.com/nghiank/spikeCodeGen.git"
   },
   "devDependencies": {
     "autoprefixer": "^6.0.0",

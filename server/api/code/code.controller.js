@@ -24,12 +24,19 @@ exports.compileAndRun = function(req, res) {
 
 
   request(options, function(error,response, body){
+    if (!response) { 
+        res.status(408).send({"error":"Request timeout"});
+        return;
+    }
+    var statusCode = response.statusCode || 408;
     if (error) {
       console.log(error);
-      res.status(response.statusCode).send(error);
+      res.status(statusCode).send(error);
     } else {
       console.log(response.statusCode, body);
-      res.status(response.statusCode).send(body);
+      res.status(statusCode).send(body);
     }
+
+    
   });
 };

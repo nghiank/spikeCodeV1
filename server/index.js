@@ -8,5 +8,7 @@ if (env === 'development' || env === 'test') {
   require('babel-core/register');
 }
 
+var s = require('spikecode');
+console.log(s);
 // Export the application
 exports = module.exports = require('./app');
