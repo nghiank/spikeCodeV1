@@ -550,6 +550,17 @@ module.exports = function (grunt) {
     },
   });
 
+  //Run single test
+  grunt.registerTask('singleTest', 'Run single test', function(testName){
+      if (testName) {        
+        grunt.config('mochaTest.unit.src', ['<%= yeoman.server %>/**/' + testName + '.spec.js']);                
+      }
+      
+      grunt.task.run([        
+        'env:test',
+        'mochaTest:unit']);      
+  });
+  
   // Used for delaying livereload until after server has restarted
   grunt.registerTask('wait', function () {
     grunt.log.ok('Waiting for server reload...');
