@@ -1,8 +1,7 @@
 'use strict';
 (function() {
 
-function MainController($scope, $http) {
-  var self = this;
+function MainController($scope, $http) {  
 
   $scope.languageId = '7';
 

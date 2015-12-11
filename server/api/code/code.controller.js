@@ -11,7 +11,17 @@ exports.compileAndRun = function(req, res) {
     code : req.body.code,
     stdin: 'nonsense'
   };
+ 
+  var SpikeCode = require('spikecode');
+  var args = [SpikeCode.allTypes.int];
+  var generatorFactory = new SpikeCode.CodeGenerateFactory();
+  var signature = new SpikeCode.FunctionSignature('sortBall', SpikeCode.allTypes.int, args);
+  var generator = generatorFactory.getGenerator("C++");
+  generator.setFunctionSignature(signature);
+  
 
+  
+  
   var options = {
       url: 'http://localhost:2015/compile',
       method: 'POST',
@@ -21,7 +31,6 @@ exports.compileAndRun = function(req, res) {
       },
       body : languageAndCode
   };
-
 
   request(options, function(error,response, body){
     if (!response) { 

@@ -6,31 +6,30 @@
 // ${fileExtname}: the current opened file's extension
 // ${cwd}: the current working directory of the spawned process
 
-// A task runner that calls the Typescript compiler (tsc) and
-// Compiles a HelloWorld.ts program
+// A task runner that run single unit test
 {
 	"version": "0.1.0",
 
-	// The command is tsc. Assumes that tsc has been installed using npm install -g typescript
-	"command": "grunt",
-	
-	// which test case
-	"args": ["singleTest:index"],
-
-	// The command is a shell script
-	"isShellCommand": true,
+	"command": "grunt",	
 	
 	"tasks": [
 		{
 			"taskName": "run-single-tests",
+			"args": ["singleTest:index"],
 			"isTestCommand": true,
-			"isBuildCommand": false
-		}
-	],
-
-
-	// Show the output window only if unrecognized errors occur.
-	"showOutput": "silent"
+			"isBuildCommand": false,
+			"suppressTaskName": true,
+			"isWatching": true
+		},
+		{
+			"taskName" : "run jshint client",
+			"args" : ["jshint:all", "jshint:server"],
+			"isTestCommand": false,
+			"isBuildCommand": true,
+			"suppressTaskName": true,
+			"isWatching": true
+		}				
+	]
 }
 
 // A task runner that calls the Typescript compiler (tsc) and
@@ -58,26 +57,7 @@
 }
 */
 
-// A task runner configuration for gulp. Gulp provides a less task
-// which compiles less to css.
-/*
-{
-	"version": "0.1.0",
-	"command": "gulp",
-	"isShellCommand": true,
-	"tasks": [
-		{
-			"taskName": "less",
-			// Make this the default build command.
-			"isBuildCommand": true,
-			// Show the output window only if unrecognized errors occur.
-			"showOutput": "silent",
-			// Use the standard less compilation problem matcher.
-			"problemMatcher": "$lessCompile"
-		}
-	]
-}
-*/
+
 
 // Uncomment the following section to use jake to build a workspace
 // cloned from https://github.com/Microsoft/TypeScript.git

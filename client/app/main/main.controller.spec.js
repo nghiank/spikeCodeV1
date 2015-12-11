@@ -21,8 +21,10 @@ describe('Controller: MainController', function() {
     });
   }));
 
+  /*  keep it for reference
   it('should attach a list of things to the controller', function() {
     $httpBackend.flush();
     expect(MainController.awesomeThings.length).toBe(4);
   });
+  */
 });
