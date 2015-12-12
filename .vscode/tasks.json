@@ -14,6 +14,14 @@
 	
 	"tasks": [
 		{
+			"taskName": "run-single-integration-tests",
+			"args": ["singleIntegrationTest:code"],
+			"isTestCommand": true,
+			"isBuildCommand": false,
+			"suppressTaskName": true,
+			"isWatching": true
+		},		
+		{
 			"taskName": "run-single-tests",
 			"args": ["singleTest:index"],
 			"isTestCommand": true,

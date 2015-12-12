@@ -550,12 +550,21 @@ module.exports = function (grunt) {
     },
   });
 
+  //Run single integration test 
+  grunt.registerTask('singleIntegrationTest', 'Run single integration test', function(testName){
+      if (testName) {        
+        grunt.config('mochaTest.integration.src', ['<%= yeoman.server %>/**/' + testName + '.integration.js']);                
+      }      
+      grunt.task.run([        
+        'env:test',
+        'mochaTest:integration']);      
+  });
+  
   //Run single test
   grunt.registerTask('singleTest', 'Run single test', function(testName){
       if (testName) {        
         grunt.config('mochaTest.unit.src', ['<%= yeoman.server %>/**/' + testName + '.spec.js']);                
-      }
-      
+      }      
       grunt.task.run([        
         'env:test',
         'mochaTest:unit']);      
