@@ -2,15 +2,23 @@
 
 var request = require('request');
 
+function handleError(res, statusCode) {
+  statusCode = statusCode || 500;
+  return function(err) {
+    res.status(statusCode).send(err);
+  };
+}
+
 // Creates a new Thing in the DB
 exports.compileAndRun = function(req, res) {
-  var code = req.body.code;
+  
+  if (!req.body.code || !req.body.languageId /*|| !req.body.problemId*/) {
+    handleError(res)("Invalid param");
+  }  
+  
+  var userCode = req.body.code;
   var languageId = req.body.languageId;
-  var languageAndCode = {
-    language: languageId,
-    code : req.body.code,
-    stdin: 'nonsense'
-  };
+  //var problemId = req.body.problemId;
  
   var SpikeCode = require('spikecode');
   var args = [SpikeCode.allTypes.int];
@@ -18,7 +26,15 @@ exports.compileAndRun = function(req, res) {
   var signature = new SpikeCode.FunctionSignature('sortBall', SpikeCode.allTypes.int, args);
   var generator = generatorFactory.getGenerator("C++");
   generator.setFunctionSignature(signature);
-  console.log("code is : " + code);
+  var code = generator.generateProgram(userCode);
+  
+  var languageAndCode = {
+    language: languageId,
+    code : code,
+    stdin: 'nonsense'
+  };
+  
+  //console.log("code is : " + code);
   var options = {
       url: 'http://localhost:2015/compile',
       method: 'POST',
@@ -36,13 +52,11 @@ exports.compileAndRun = function(req, res) {
     }
     var statusCode = response.statusCode || 408;
     if (error) {
-      console.log(error);
+      //console.log(error);
       res.status(statusCode).send(error);
     } else {
-      console.log(response.statusCode, body);
+      //console.log(response.statusCode, body);
       res.status(statusCode).send(body);
-    }
-
-    
+    }    
   });
 };
