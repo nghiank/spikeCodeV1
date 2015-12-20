@@ -14,21 +14,29 @@
 	
 	"tasks": [
 		{
-			"taskName": "run-single-integration-tests",
-			"args": ["singleIntegrationTest:code"],
-			"isTestCommand": true,
-			"isBuildCommand": false,
-			"suppressTaskName": true,
-			"isWatching": true
-		},		
-		{
-			"taskName": "run-single-tests",
-			"args": ["singleTest:index"],
+			"taskName": "run-karmar-client-tests",
+			"args": ["test:client"],
 			"isTestCommand": true,
 			"isBuildCommand": false,
 			"suppressTaskName": true,
 			"isWatching": true
 		},
+		{
+			"taskName": "run-single-tests",
+			"args": ["singleTest:problems.controller"],
+			"isTestCommand": true,
+			"isBuildCommand": false,
+			"suppressTaskName": true,
+			"isWatching": true
+		},
+		{
+			"taskName": "run-single-integration-tests",
+			"args": ["singleIntegrationTest:problem"],
+			"isTestCommand": true,
+			"isBuildCommand": false,
+			"suppressTaskName": true,
+			"isWatching": true
+		},							
 		{
 			"taskName" : "run jshint client",
 			"args" : ["jshint:all", "jshint:server"],
