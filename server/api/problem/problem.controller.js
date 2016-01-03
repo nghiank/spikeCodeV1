@@ -12,6 +12,10 @@
 var _ = require('lodash');
 var Problem = require('./problem.model');
 
+function validationErrro(res, statusCode) {
+  
+}
+
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
@@ -23,6 +27,7 @@ function responseWithResult(res, statusCode) {
   statusCode = statusCode || 200;
   return function(entity) {
     if (entity) {
+      //console.log('entity:' + JSON.stringify(entity));
       res.status(statusCode).json(entity);
     }
   };

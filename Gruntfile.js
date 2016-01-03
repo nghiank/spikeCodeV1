@@ -550,13 +550,33 @@ module.exports = function (grunt) {
     },
   });
 
+  //Run single protractor test
+  grunt.registerTask('singleProtractorTest', 'Run single protractor test', function(testName){
+      if (testName) {        
+        var fileName = 'e2e/**/' + testName + '.spec.js';
+        grunt.config('protractor.chrome.options.args.specs', [fileName]);                
+      }      
+      grunt.task.run([
+          'clean:server',
+          'env:all',
+          'env:test',
+          'concurrent:test',
+          'injector',
+          'wiredep:client',
+          'postcss',
+          'express:dev',
+          'protractor'
+      ]);      
+  });
+  
   //Run single integration test 
   grunt.registerTask('singleIntegrationTest', 'Run single integration test', function(testName){
       if (testName) {        
         grunt.config('mochaTest.integration.src', ['<%= yeoman.server %>/**/' + testName + '.integration.js']);                
       }      
-      grunt.task.run([        
-        'env:test',
+      grunt.task.run([
+        'env:all',        
+        'env:test',        
         'mochaTest:integration']);      
   });
   

@@ -2,38 +2,50 @@
 
 var app = require('../..');
 var request = require('supertest');
-
+var Problem = require('./problem.model');
 var newproblem;
 
 describe('problem API:', function() {
+/*
+  // Clear users before testing
+  before(function() {    
+    return Problem.removeAsync();
+  });
 
+  // Clear users after testing
+  after(function() {
+    console.log('this was called');
+    return Problem.removeAsync();
+  });*/
+  
   describe('GET /api/problems', function() {
     var problems;
 
     beforeEach(function(done) {
       request(app)
-        .get('/api/problems')
+        .get('/api/problems/')
         .expect(200)
         .expect('Content-Type', /json/)
-        .end(function(err, res) {
-          if (err) {
-            return done(err);
-          }
+        .end(function(err, res) {          
           problems = res.body;
+          console.log('body:' + JSON.stringify(res.body));
+          //console.log('problems:' + JSON.stringify(problems));
           done();
-        });
+        });        
     });
 
     it('should respond with JSON array', function() {
+      console.log('problems:' + JSON.stringify(problems));
+      console.log(typeof problems);
       problems.should.be.instanceOf(Array);
     });
 
   });
-
+/*
   describe('POST /api/problems', function() {
     beforeEach(function(done) {
       request(app)
-        .post('/api/problems')
+        .post('/api/problems/')
         .send({
           	 problemName: "Sum2",
   		       desc: "Find two sum",
@@ -47,7 +59,7 @@ describe('problem API:', function() {
         .expect(200)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
-          if (err) {
+          if (err) {            
             return done(err);
           }
           newproblem = res.body;
@@ -149,6 +161,6 @@ describe('problem API:', function() {
         });
     });
 
-  });
+  });*/
 
 });

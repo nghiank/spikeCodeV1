@@ -13,7 +13,6 @@ function MainController($scope, $http) {
         code: $scope.code
       }
     ).then(function(response){
-
         var out = response.data;
         $scope.build = {};
         if (out.errors) {
@@ -31,5 +30,4 @@ function MainController($scope, $http) {
 
 angular.module('spikeCodeApp')
   .controller('MainController', MainController);
-
 })();
