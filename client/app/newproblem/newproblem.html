@@ -6,19 +6,55 @@
       <h1 class="page-header">New Problem</h1>
 	    <div class="col-sm-8 col-sm-offset-2">
       <!-- FORM -->
-      <form class='form' name="userForm" ng-submit="submitForm()">
-          <div class="form-group">
+      <form class='form' name="form" ng-submit="submitForm(form)">
+          <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
+                                              'has-error': form.name.$invalid && submitted}">
               <label>Name</label>
-              <input type="text" name="name" class="form-control" ng-model="problem.name">
+              <input type="text" name="problemName" class="form-control" ng-model="problem.problemName" required>
               <p class="help-block" ng-show="form.name.$error.required && submitted">
-                A name is required
+                Problem name is required
+              </p>      
+              <p class="help-block" ng-show="form.name.$error.mongoose">
+                Problem name is required
+              </p>        
+          </div>
+          <div class="form-group" ng-class="{ 'has-success': form.desc.$valid && submitted,
+                                              'has-error': form.desc.$invalid && submitted}">
+              <label>Description</label>
+              <textarea rows="10" type="text" name="desc" class="form-control" ng-model="problem.desc" required/>
+              <p class="help-block" ng-show="form.desc.$error.required && submitted">
+                Description is required
               </p>              
+              <p class="help-block" ng-show="form.desc.$error.mongoose">
+                Description is required
+              </p>
           </div>
           <div class="form-group">
-              <label>Description</label>
-              <textarea rows="10" type="text" name="desc" class="form-control" ng-model="problem.desc"/>              
+              <label>Function name</label>
+              <input type="text" name="funcSignature.funcName" class="form-control" ng-model="problem.funcSignature.funcName" required>
+              <p class="help-block" ng-show="form.funcSignature.funcName.$error.required && submitted">
+                Function name is required
+              </p>              
+              <p class="help-block" ng-show="form.funcSignature.funcName.$error.mongoose">
+                Function name is required
+              </p>
           </div>
-          <button type="submit" class="btn btn-primary btn-submit">Submit</button>
+          <div class="form-group">
+              <label>Return type</label>
+              <select name="funcSignature.returnType" ng-model="problem.funcSignature.returnType">
+                <option value="int">int</option>
+                <option value="double">double</option>
+                <option value="string">string</option>
+                <option value="vectorInt">vector&lt;int&gt;</option>
+                <option value="vectorDouble">vector&lt;double&gt;</option>
+                <option value="vectorString">vector&lt;string&gt;</option>
+                <option value="vectorVectorInt">vector&lt;vector&lt;int&gt;&gt;</option>
+                <option value="vectorVectorDouble">vector&lt;vector&lt;double&gt;&gt;</option>
+                <option value="vectorVectorString">vector&lt;vector&lt;string&gt;&gt;</option>
+              </select>
+          </div>
+          
+          <button type="submit" class="btn btn-primary btn-submit">Submit</button>          
       </form>        
       </div>
     </div>

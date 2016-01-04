@@ -3,26 +3,31 @@
 angular.module('spikeCodeApp')
   .controller('NewproblemCtrl', function ($scope, $http) {
     $scope.problem = {};
-    $scope.problem.name = '';
+    $scope.problem.problemName = '';
     $scope.problem.desc = '';
-    $scope.submitForm = function() {
-      $http({
-        method: 'POST',
-        url: '/api/problems',
-        data: $scope.problem,
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'} 
-      }).success(function(data){
-        
-            console.log(JSON.stringify(data.errors));
-            if (data.errors) {
-              // Showing errors.
-              $scope.errorName = data.errors.name;
-              
-              //$scope.errorUserName = data.errors.username;
-              //$scope.errorEmail = data.errors.email;
-            } else {
-              $scope.message = data.message;
-            }
-      }); //end of http
+    $scope.problem.funcSignature = {
+        funcName : "solve",
+        returnType : "int",
+        params : []
+    };
+    
+    $scope.submitForm = function(form) {
+      $scope.submitted = true;      
+      if (form.$valid) {
+        $http({
+          method: 'POST',
+          url: '/api/problems',
+          data: $scope.problem,
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'} 
+        }).catch(function(err){              
+              $scope.errors = {};
+              console.log(JSON.stringify(err));
+              angular.forEach(err.data.errors, function(error, field){
+                console.log(field);
+                  form[field].$setValidity('mongoose', false);
+                  $scope.errors[field] = error.message;
+              });             
+        }); //end of http
+      }
     }; //end of submit form
   });
