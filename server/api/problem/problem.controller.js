@@ -17,7 +17,7 @@ function validationErrro(res, statusCode) {
 }
 
 function handleError(res, statusCode) {
-  statusCode = statusCode || 500;
+  statusCode = statusCode || 422;
   return function(err) {
     res.status(statusCode).send(err);
   };

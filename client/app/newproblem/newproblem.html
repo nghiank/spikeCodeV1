@@ -7,36 +7,37 @@
 	    <div class="col-sm-8 col-sm-offset-2">
       <!-- FORM -->
       <form class='form' name="form" ng-submit="submitForm(form)">
-          <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
-                                              'has-error': form.name.$invalid && submitted}">
+          <div class="form-group" ng-class="{ 'has-success': form.problemName.$valid && submitted,
+                                              'has-error': form.problemName.$invalid && submitted}">
               <label>Name</label>
-              <input type="text" name="problemName" class="form-control" ng-model="problem.problemName" required>
-              <p class="help-block" ng-show="form.name.$error.required && submitted">
+              <input type="text" name="problemName" class="form-control" ng-model="problem.problemName" required mongoose-error>
+              <p class="help-block" ng-show="form.problemName.$error.required && submitted">
                 Problem name is required
               </p>      
-              <p class="help-block" ng-show="form.name.$error.mongoose">
-                Problem name is required
+              <p class="help-block" ng-show="form.problemName.$error.mongoose">
+                {{ errors.problemName }}
               </p>        
           </div>
           <div class="form-group" ng-class="{ 'has-success': form.desc.$valid && submitted,
                                               'has-error': form.desc.$invalid && submitted}">
               <label>Description</label>
-              <textarea rows="10" type="text" name="desc" class="form-control" ng-model="problem.desc" required/>
+              <textarea rows="10" type="text" name="desc" class="form-control" ng-model="problem.desc" required mongoose-error/>
               <p class="help-block" ng-show="form.desc.$error.required && submitted">
                 Description is required
               </p>              
               <p class="help-block" ng-show="form.desc.$error.mongoose">
-                Description is required
+                {{ errors.desc }}
               </p>
           </div>
-          <div class="form-group">
+          <div class="form-group" ng-class="{ 'has-success': form['funcSignature.funcName'].$valid && submitted,
+                                              'has-error': form['funcSignature.funcName'].$invalid && submitted}" >
               <label>Function name</label>
-              <input type="text" name="funcSignature.funcName" class="form-control" ng-model="problem.funcSignature.funcName" required>
-              <p class="help-block" ng-show="form.funcSignature.funcName.$error.required && submitted">
+              <input type="text" name="funcSignature.funcName" class="form-control" ng-model="problem.funcSignature.funcName" mongoose-error>
+              <p class="help-block" ng-show="form['funcSignature.funcName'].$error.required && submitted">
                 Function name is required
               </p>              
-              <p class="help-block" ng-show="form.funcSignature.funcName.$error.mongoose">
-                Function name is required
+              <p class="help-block" ng-show="form['funcSignature.funcName'].$error.mongoose">
+                {{ errors['funcSignature.funcName'] }}
               </p>
           </div>
           <div class="form-group">
@@ -53,8 +54,8 @@
                 <option value="vectorVectorString">vector&lt;vector&lt;string&gt;&gt;</option>
               </select>
           </div>
-          
-          <button type="submit" class="btn btn-primary btn-submit">Submit</button>          
+                  
+          <button type="submit" class="btn btn-primary btn-submit">Submit</button>                    
       </form>        
       </div>
     </div>
