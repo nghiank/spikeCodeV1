@@ -5,6 +5,8 @@ sudo apt-get -y install vim
 sudo apt-get -y update
 sudo apt-get -y install build-essential
 sudo apt-get -y install python libssl-dev
+sudo apt-get -y install ruby
+gem install tmuxinator
 
 #dot file
 if [[ ! -d ~/dotfile ]]; then
