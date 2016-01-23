@@ -7,6 +7,8 @@ sudo apt-get -y install build-essential
 sudo apt-get -y install python libssl-dev
 sudo apt-get -y install ruby
 gem install tmuxinator
+sudo apt-get install build-essential cmake
+sudo apt-get install python-devel
 
 #dot file
 if [[ ! -d ~/dotfile ]]; then
